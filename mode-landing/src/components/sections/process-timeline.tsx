@@ -28,13 +28,18 @@ export function ProcessTimeline() {
 
                   {/* Content Side */}
                   <div className="flex-1 md:w-1/2 pl-16 md:pl-0 md:px-16">
-                    <div className={`relative bg-white p-6 rounded-2xl shadow-sm ${index % 2 === 0 ? "md:text-left" : "md:text-right"
+                    <div className={`relative bg-white p-6 rounded-2xl shadow-sm overflow-hidden ${index % 2 === 0 ? "md:text-left" : "md:text-right"
                       }`}>
-                      <span className="inline-block px-3 py-1 rounded-full bg-gray-100 text-xs font-bold text-textSecondary mb-4 uppercase tracking-wider">
+                      {/* Large Number Background - Inspired by Ref 1 */}
+                      <span className="absolute top-0 right-4 text-[8rem] font-black text-electricBlue/5 leading-none select-none pointer-events-none">
+                        0{index + 1}
+                      </span>
+
+                      <span className="inline-block px-3 py-1 rounded-full bg-gray-100 text-xs font-bold text-textSecondary mb-4 uppercase tracking-wider relative z-10">
                         {step.label}
                       </span>
-                      <h3 className="font-heading text-2xl font-bold mb-3 text-textPrimary tracking-tight">{step.title}</h3>
-                      <p className="text-textSecondary text-base leading-relaxed max-w-md mx-auto md:mx-0">
+                      <h3 className="font-heading text-2xl font-bold mb-3 text-textPrimary tracking-tight relative z-10">{step.title}</h3>
+                      <p className="text-textSecondary text-base leading-relaxed max-w-md mx-auto md:mx-0 relative z-10">
                         {step.text}
                       </p>
                     </div>

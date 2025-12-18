@@ -96,6 +96,17 @@
     background: linear-gradient(90deg, #FF1F8A 0%, #FF8F28 100%);
   }
 
+  /* Halftone Pattern - Inspired by Ref 2 */
+  .halftone-pattern {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.04) 2px, transparent 2px);
+    background-size: 20px 20px;
+  }
+
+  .halftone-pattern-dense {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1.5px, transparent 1.5px);
+    background-size: 12px 12px;
+  }
+
   /* Glassmorphism - White Theme Version */
   .glass-card {
     background: rgba(255, 255, 255, 0.8);

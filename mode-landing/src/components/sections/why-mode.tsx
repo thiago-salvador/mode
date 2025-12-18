@@ -207,8 +207,10 @@ export function WhyMode() {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-white via-gray-50/30 to-white overflow-hidden">
-      <div className="max-w-7xl mx-auto container-padding">
+    <section ref={sectionRef} className="relative py-24 bg-gradient-to-b from-white via-gray-50/30 to-white overflow-hidden">
+      {/* Halftone Background Pattern - Inspired by Ref 2 */}
+      <div className="absolute inset-0 halftone-pattern pointer-events-none" />
+      <div className="max-w-7xl mx-auto container-padding relative z-10">
         {/* Section Header */}
         <motion.div
           ref={headerRef}

@@ -18,7 +18,7 @@ export function Button({ children, href, onClick, variant = "primary", className
   const baseStyles = "inline-flex items-center justify-center transition-all duration-300 text-sm font-semibold tracking-wide relative overflow-hidden cursor-pointer";
 
   const variantStyles = {
-    primary: "px-5 py-2.5 rounded-pill bg-navIconBg text-textOnDark hover:bg-[#020617] shadow-cardSoft group",
+    primary: "px-5 py-2.5 rounded-pill bg-electricBlue text-white hover:bg-[#0070E0] shadow-cardSoft group hover:shadow-lg hover:shadow-electricBlue/30 transition-all",
     secondary: "px-[18px] py-2.5 rounded-pill bg-[#F9FAFB] text-textPrimary border border-borderSubtle hover:bg-white hover:shadow-cardFlat",
   };
 

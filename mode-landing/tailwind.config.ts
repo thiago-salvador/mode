@@ -41,6 +41,10 @@ const config: Config = {
         accentBlue: "#295AF9",
         accentFrom: "#FF1F8AFF", // More vibrant pink
         accentTo: "#FF8F28FF",   // More vibrant orange
+        // New vibrant colors from refs
+        electricBlue: "#0080FF", // Ref 2 - Tech energy
+        neonYellow: "#FFFF00",   // Ref 1 - Bold impact
+        saturatedRed: "#FF0000", // Ref 3 - Confident statement
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

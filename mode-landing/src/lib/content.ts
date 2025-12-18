@@ -23,8 +23,11 @@ export const content = {
     },
     anxietyHook: "How do you ship an AI MVP when you're not technical?",
     headline: {
-      start: "Stop wasting months.",
-      highlight: "Ship in 2 weeks.",
+      massive: ["SHIP", "YOUR AI", "IN 14 DAYS"],
+      traditional: {
+        start: "Stop wasting months.",
+        highlight: "Ship in 2 weeks.",
+      },
     },
     subheadline: "While other founders spend 6 months and $100k+ on MVPs that never ship, you'll have real users testing your AI product in 14 days. Fixed €3,500. No hourly billing. No surprises.",
     primaryCta: {

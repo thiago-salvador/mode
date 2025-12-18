@@ -37,34 +37,23 @@ export function Hero() {
                 {content.hero.anxietyHook}
               </motion.p>
 
-              {/* Word-by-word reveal headline */}
-              <h1 className="heading-hero text-textPrimary mb-6 text-balance tracking-tight">
-                <span className="block">
-                  {content.hero.headline.start.split(' ').map((word, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                      className="inline-block mr-[0.25em]"
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </span>
-                <span className="gradient-text block">
-                  {content.hero.headline.highlight.split(' ').map((word, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                      className="inline-block mr-[0.25em]"
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </span>
+              {/* Massive Typography Headline - Inspired by Ref 3 */}
+              <h1 className="font-black tracking-tighter leading-[0.85] mb-8">
+                {content.hero.headline.massive.map((line, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                    className={`text-[clamp(3.5rem,12vw,10rem)] ${
+                      i === 0 ? 'text-textPrimary' :
+                      i === 1 ? 'gradient-text' :
+                      'text-electricBlue'
+                    }`}
+                  >
+                    {line}
+                  </motion.div>
+                ))}
               </h1>
 
               <p className="text-xl md:text-2xl text-textSecondary mb-10 max-w-lg text-balance leading-relaxed">
