@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mode - AI MVP Studio</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#050509',
+            surface: '#0B0B11',
+            textPrimary: '#FFFFFF',
+            textMuted: '#A2A2B3',
+            accentFrom: '#FF2D92',
+            accentTo: '#FF8A3C',
+          },
+          fontFamily: {
+            heading: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'lg': '1.25rem',
+            'xl': '1.5rem',
+          },
+          backdropBlur: {
+            'soft': '18px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #050509;
+      color: #FFFFFF;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #FF2D92, #FF8A3C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(to right, #FF2D92, #FF8A3C);
+    }
+
+    .glass-card {
+      background: linear-gradient(to bottom right, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-gradient {
+      background: radial-gradient(ellipse at top, rgba(255, 45, 146, 0.15), transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(255, 138, 60, 0.15), transparent 50%),
+                  #050509;
+      position: relative;
+    }
+
+    .hero-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05' /%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .section-padding {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Reusable Components
+    const GlassCard = ({ children, className = '' }) => (
+      <div className={`glass-card rounded-xl p-7 ${className}`}>
+        {children}
+      </div>
+    );
+
+    const Pill = ({ children, className = '' }) => (
+      <span className={`inline-block px-3.5 py-1.5 rounded-full text-xs tracking-wider bg-white/5 ${className}`}>
+        {children}
+      </span>
+    );
+
+    const PrimaryButton = ({ children, href = '#', className = '' }) => (
+      <a
+        href={href}
+        className={`inline-block px-6 py-3.5 rounded-full font-semibold gradient-bg hover:-translate-y-0.5 hover:scale-[1.01] transition-transform duration-200 ${className}`}
+      >
+        {children}
+      </a>
+    );
+
+    const SecondaryButton = ({ children, href = '#', className = '' }) => (
+      <a
+        href={href}
+        className={`inline-block px-6 py-3.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 transition-colors duration-200 ${className}`}
+      >
+        {children}
+      </a>
+    );
+
+    const SectionHeader = ({ eyebrow, title, className = '' }) => (
+      <div className={`text-center max-w-2xl mx-auto mb-12 ${className}`}>
+        {eyebrow && (
+          <p className="text-textMuted uppercase tracking-widest text-sm mb-4">
+            {eyebrow}
+          </p>
+        )}
+        <h2 className="font-heading text-4xl md:text-5xl font-bold">
+          {title}
+        </h2>
+      </div>
+    );
+
+    // Navbar Component (navbar from JSON)
+    const Navbar = () => {
+      const [isScrolled, setIsScrolled] = useState(false);
+
+      React.useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      return (
+        <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-surface/80 backdrop-blur-lg border-b border-white/8' : ''}`}>
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center gap-8">
+                <a href="#top" className="font-heading text-xl font-bold gradient-text">
+                  Mode
+                </a>
+                <div className="hidden md:flex gap-6">
+                  <a href="#how-it-works" className="text-sm hover:text-white transition-colors">How it works</a>
+                  <a href="#pricing" className="text-sm hover:text-white transition-colors">Pricing</a>
+                  <a href="#work" className="text-sm hover:text-white transition-colors">Work</a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-6">
+                <a href="#faqs" className="hidden md:inline text-sm hover:text-white transition-colors">FAQ</a>
+                <PrimaryButton href="#cta" className="text-sm">
+                  Book a roadmap call
+                </PrimaryButton>
+              </div>
+            </div>
+          </div>
+        </nav>
+      );
+    };
+
+    // Hero Section (hero from JSON)
+    const Hero = () => (
+      <section id="top" className="hero-gradient section-padding relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                Ship your AI MVP in 2 weeks
+              </h1>
+              <p className="text-lg text-textMuted mb-8 leading-relaxed">
+                Mode designs and builds focused AI MVPs for founders in Europe and the US,
+                so you can learn from real users instead of endless planning.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-8">
+                <PrimaryButton href="#cta">
+                  Start a Mode Sprint
+                </PrimaryButton>
+                <SecondaryButton href="#work">
+                  See example builds
+                </SecondaryButton>
+              </div>
+
+              <div className="flex flex-wrap gap-4 text-sm text-textMuted">
+                <span>✓ For funded and bootstrapped teams</span>
+                <span>✓ 14 day build, real deadlines</span>
+                <span>✓ Remote studio in EU and LATAM</span>
+              </div>
+            </div>
+
+            {/* Side Panel - UI Mockup Strip */}
+            <div className="relative">
+              <div className="relative transform rotate-2">
+                <GlassCard className="absolute -top-4 -left-4 w-64 h-48 opacity-60" />
+                <GlassCard className="absolute top-8 left-8 w-64 h-48 opacity-80" />
+                <GlassCard className="relative w-64 h-48 flex items-center justify-center">
+                  <div className="text-center p-6">
+                    <div className="w-12 h-12 mx-auto mb-4 rounded-full gradient-bg opacity-60" />
+                    <div className="h-2 bg-white/20 rounded mb-2" />
+                    <div className="h-2 bg-white/10 rounded w-3/4 mx-auto" />
+                  </div>
+                </GlassCard>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // MetricsStrip Section (metricsStrip from JSON)
+    const MetricsStrip = () => (
+      <section className="border-y border-white/8 py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-center text-textMuted uppercase tracking-widest text-xs mb-8">
+            Mode by the numbers
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="font-heading text-4xl font-bold gradient-text mb-2">20+</div>
+              <div className="text-sm text-textMuted">MVPs shipped</div>
+            </div>
+            <div>
+              <div className="font-heading text-4xl font-bold gradient-text mb-2">$5M+</div>
+              <div className="text-sm text-textMuted">Revenue influenced</div>
+            </div>
+            <div>
+              <div className="font-heading text-4xl font-bold gradient-text mb-2">14 days</div>
+              <div className="text-sm text-textMuted">Average build time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // BenefitCards Section (benefitCards from JSON)
+    const BenefitCards = () => (
+      <section id="how-it-works" className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Why founders work with Mode"
+            title="Build once, but in the right direction"
+          />
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <GlassCard>
+              <div className="w-12 h-12 rounded-xl gradient-bg mb-4 flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-xl font-semibold mb-3">Roadmap clarity in days</h3>
+              <p className="text-textMuted leading-relaxed">
+                We cut your idea down to one sharp, testable MVP that actually fits in 2 weeks,
+                with a backlog for later.
+              </p>
+            </GlassCard>
+
+            <GlassCard>
+              <div className="w-12 h-12 rounded-xl gradient-bg mb-4 flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-xl font-semibold mb-3">AI without the complexity</h3>
+              <p className="text-textMuted leading-relaxed">
+                You get sensible choices for models, tools and automations. No over engineered stacks,
+                no research rabbit holes.
+              </p>
+            </GlassCard>
+
+            <GlassCard>
+              <div className="w-12 h-12 rounded-xl gradient-bg mb-4 flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-xl font-semibold mb-3">Launch ready, not just a prototype</h3>
+              <p className="text-textMuted leading-relaxed">
+                Your MVP ships with onboarding, analytics and a feedback loop so you can keep
+                iterating after the sprint.
+              </p>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+    );
+
+    // Process Timeline Section (process from JSON)
+    const ProcessTimeline = () => (
+      <section id="process" className="section-padding bg-surface/30">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Your 14 day build plan"
+            title="What working with Mode feels like"
+          />
+
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="relative">
+              <Pill className="mb-4">Day 0 to 2</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Scope and focus</h3>
+              <p className="text-textMuted text-sm leading-relaxed">
+                Workshop to define target user, one core job to be done and the single flow we will ship.
+              </p>
+              <div className="hidden md:block absolute top-12 right-0 w-full h-0.5 bg-gradient-to-r from-accentFrom to-transparent" />
+            </div>
+
+            <div className="relative">
+              <Pill className="mb-4">Day 3 to 7</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Design and build</h3>
+              <p className="text-textMuted text-sm leading-relaxed">
+                Wireframes, UI and implementation of the main flow using AI plus no code or light code.
+              </p>
+              <div className="hidden md:block absolute top-12 right-0 w-full h-0.5 bg-gradient-to-r from-accentFrom to-transparent" />
+            </div>
+
+            <div className="relative">
+              <Pill className="mb-4">Day 8 to 11</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Integrate and refine</h3>
+              <p className="text-textMuted text-sm leading-relaxed">
+                Connect data sources, polish interactions, test internally and fix rough edges.
+              </p>
+              <div className="hidden md:block absolute top-12 right-0 w-full h-0.5 bg-gradient-to-r from-accentFrom to-transparent" />
+            </div>
+
+            <div>
+              <Pill className="mb-4">Day 12 to 14</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Launch with real users</h3>
+              <p className="text-textMuted text-sm leading-relaxed">
+                Onboard pilot users, track metrics and define next experiments and follow up sprints.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    // WorkShowcase Section (workShowcase from JSON)
+    const WorkShowcase = () => (
+      <section id="work" className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Explore work"
+            title="Examples of Mode builds"
+          />
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <GlassCard className="hover:border-white/20 transition-colors">
+              <Pill className="mb-4">B2B agency</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Agency inbox copilot</h3>
+              <p className="text-textMuted leading-relaxed">
+                AI assistant that drafts replies and next steps for inbound leads, cutting response
+                time in half.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="hover:border-white/20 transition-colors">
+              <Pill className="mb-4">SaaS and communities</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Community insights layer</h3>
+              <p className="text-textMuted leading-relaxed">
+                Tool that aggregates community and CRM data to surface segments and suggested campaigns.
+              </p>
+            </GlassCard>
+
+            <GlassCard className="hover:border-white/20 transition-colors">
+              <Pill className="mb-4">Creators</Pill>
+              <h3 className="font-heading text-xl font-semibold mb-3">Creator analytics mini SaaS</h3>
+              <p className="text-textMuted leading-relaxed">
+                Simple dashboard that pulls social data and comments to help a creator studio ship new offers.
+              </p>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+    );
+
+    // Pricing Section (pricing from JSON)
+    const Pricing = () => (
+      <section id="pricing" className="section-padding bg-surface/30">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="Transparent pricing"
+            title="Start with a sprint, extend if it works"
+          />
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <GlassCard>
+              <h3 className="font-heading text-2xl font-bold mb-2">Mode Sprint</h3>
+              <div className="mb-4">
+                <span className="text-4xl font-bold gradient-text">€4,500</span>
+              </div>
+              <p className="text-textMuted mb-6">
+                Two week MVP for one core user flow.
+              </p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Discovery workshop and product brief</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Clickable prototype of main flow</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Implementation using AI and no code stack</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Basic analytics and feedback setup</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Handover and next steps roadmap</span>
+                </li>
+              </ul>
+              <SecondaryButton href="#cta" className="w-full text-center">
+                Book Sprint call
+              </SecondaryButton>
+            </GlassCard>
+
+            <GlassCard className="border-accentFrom/30 relative">
+              <div className="absolute -top-3 right-4">
+                <Pill className="bg-gradient-to-r from-accentFrom to-accentTo text-white">Popular</Pill>
+              </div>
+              <h3 className="font-heading text-2xl font-bold mb-2">Mode Studio</h3>
+              <div className="mb-4">
+                <span className="text-4xl font-bold gradient-text">€9,500</span>
+              </div>
+              <p className="text-textMuted mb-6">
+                From idea to launch with Mode owning build and early iterations.
+              </p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Everything in Mode Sprint</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Extra flows or integrations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Back office automations where needed</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Support during first 2 weeks post launch</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-accentFrom flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm">Priority access for follow up sprints</span>
+                </li>
+              </ul>
+              <PrimaryButton href="#cta" className="w-full text-center">
+                Talk about Studio
+              </PrimaryButton>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+    );
+
+    // Testimonials Section (testimonials from JSON)
+    const Testimonials = () => (
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            eyebrow="What founders say"
+            title="You do not need another deck. You need something live."
+          />
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <GlassCard>
+              <p className="text-textMuted italic mb-4 leading-relaxed">
+                "Mode forced us to cut our idea in half and ship something simple.
+                That is why we are talking to paying users now."
+              </p>
+              <p className="text-sm font-semibold">Founder, B2B SaaS</p>
+            </GlassCard>
+
+            <GlassCard>
+              <p className="text-textMuted italic mb-4 leading-relaxed">
+                "We had been stuck for months trying to productize a service. In two weeks we had
+                a working AI tool clients could log into."
+              </p>
+              <p className="text-sm font-semibold">Partner, marketing agency</p>
+            </GlassCard>
+
+            <GlassCard>
+              <p className="text-textMuted italic mb-4 leading-relaxed">
+                "It felt like adding a product team without hiring. Clear scope, fast decisions,
+                zero fluff."
+              </p>
+              <p className="text-sm font-semibold">Solo creator</p>
+            </GlassCard>
+          </div>
+        </div>
+      </section>
+    );
+
+    // FAQs Section (faqs from JSON)
+    const FAQs = () => {
+      const [openIndex, setOpenIndex] = useState(null);
+
+      const faqs = [
+        {
+          question: "Who is Mode for?",
+          answer: "Founders and teams who already feel a specific problem and want a sharp MVP to test it, not a full platform."
+        },
+        {
+          question: "Do you take equity?",
+          answer: "No by default. We work on clear fixed pricing. In rare cases we can discuss a small equity component."
+        },
+        {
+          question: "What do you need from us?",
+          answer: "A short written brief and a 60 minute kickoff call. Most collaboration after that is async."
+        },
+        {
+          question: "What happens after the sprint?",
+          answer: "You keep the product, code and accounts. We can hand over to your team or line up another sprint."
+        }
+      ];
+
+      return (
+        <section id="faqs" className="section-padding bg-surface/30">
+          <div className="max-w-3xl mx-auto px-6">
+            <SectionHeader title="Questions founders actually ask" />
+
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <GlassCard
+                  key={index}
+                  className="cursor-pointer hover:border-white/20 transition-colors"
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                >
+                  <div className="flex justify-between items-start gap-4">
+                    <h3 className="font-heading text-lg font-semibold">{faq.question}</h3>
+                    <span className="text-2xl flex-shrink-0">
+                      {openIndex === index ? '−' : '+'}
+                    </span>
+                  </div>
+                  {openIndex === index && (
+                    <p className="text-textMuted mt-4 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  )}
+                </GlassCard>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // FinalCTA Section (finalCta from JSON)
+    const FinalCTA = () => {
+      const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        company: '',
+        region: 'Europe',
+        idea: ''
+      });
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData);
+        alert('Thank you! We will review your submission and get back to you soon.');
+      };
+
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+
+      return (
+        <section id="cta" className="section-padding">
+          <div className="max-w-2xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <p className="text-textMuted uppercase tracking-widest text-sm mb-4">
+                Two weeks from now you could have a live product
+              </p>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
+                Ready to stop planning and start shipping?
+              </h2>
+              <p className="text-textMuted text-lg">
+                Tell us about your idea and we will reply with a simple 14 day MVP plan.
+              </p>
+            </div>
+
+            <GlassCard>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Your name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-accentFrom focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Work email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-accentFrom focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Company or project</label>
+                  <input
+                    type="text"
+                    name="company"
+                    required
+                    value={formData.company}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-accentFrom focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Region</label>
+                  <select
+                    name="region"
+                    value={formData.region}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-accentFrom focus:outline-none transition-colors"
+                  >
+                    <option value="Europe">Europe</option>
+                    <option value="US">US</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">What do you want to build?</label>
+                  <textarea
+                    name="idea"
+                    required
+                    rows={4}
+                    value={formData.idea}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-accentFrom focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full px-6 py-4 rounded-full font-semibold gradient-bg hover:-translate-y-0.5 transition-transform duration-200"
+                >
+                  Send my idea
+                </button>
+              </form>
+            </GlassCard>
+          </div>
+        </section>
+      );
+    };
+
+    // Footer Section (footer from JSON)
+    const Footer = () => (
+      <footer className="border-t border-white/8 py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div>
+              <a href="#top" className="font-heading text-2xl font-bold gradient-text inline-block mb-4">
+                Mode
+              </a>
+              <p className="text-textMuted text-sm leading-relaxed max-w-md">
+                Mode is a lean AI MVP studio helping founders turn overthinking into shipped products.
+              </p>
+            </div>
+
+            <div className="md:text-right">
+              <p className="text-sm mb-4">
+                <a href="mailto:hello@modemvp.studio" className="text-textMuted hover:text-white transition-colors">
+                  hello@modemvp.studio
+                </a>
+              </p>
+              <div className="flex md:justify-end gap-6 text-sm">
+                <a href="#how-it-works" className="text-textMuted hover:text-white transition-colors">How it works</a>
+                <a href="#pricing" className="text-textMuted hover:text-white transition-colors">Pricing</a>
+                <a href="#faqs" className="text-textMuted hover:text-white transition-colors">FAQ</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-white/8 text-center text-sm text-textMuted">
+            © Mode Studio. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    );
+
+    // Main App Component
+    const App = () => (
+      <>
+        <Navbar />
+        <Hero />
+        <MetricsStrip />
+        <BenefitCards />
+        <ProcessTimeline />
+        <WorkShowcase />
+        <Pricing />
+        <Testimonials />
+        <FAQs />
+        <FinalCTA />
+        <Footer />
+      </>
+    );
+
+    // Render
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

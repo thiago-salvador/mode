@@ -1,0 +1,314 @@
+{
+    "site": {
+      "name": "Mode",
+      "description": "AI MVP studio for ambitious founders",
+      "techStack": {
+        "framework": "Next.js or React SPA",
+        "styling": "Tailwind CSS",
+        "fontSuggestions": {
+          "heading": "Space Grotesk or similar geometric sans",
+          "body": "Inter or similar neutral sans"
+        }
+      },
+      "theme": {
+        "background": "#050509",
+        "surface": "#0B0B11",
+        "textPrimary": "#FFFFFF",
+        "textMuted": "#A2A2B3",
+        "accentGradient": {
+          "from": "#FF2D92",
+          "to": "#FF8A3C"
+        },
+        "borderSoft": "rgba(255,255,255,0.08)",
+        "radiusLg": "1.25rem",
+        "shadowSoft": "0 18px 45px rgba(0,0,0,0.55)"
+      },
+      "layout": {
+        "maxWidth": "1200px",
+        "sectionVerticalPadding": "5rem",
+        "contentGutter": "1.5rem",
+        "sectionsOrder": [
+          "navbar",
+          "hero",
+          "metricsStrip",
+          "benefitCards",
+          "process",
+          "workShowcase",
+          "pricing",
+          "testimonials",
+          "faqs",
+          "finalCta",
+          "footer"
+        ]
+      },
+      "components": {
+        "glassCard": {
+          "background": "linear-gradient(to bottom right, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
+          "border": "1px solid rgba(255,255,255,0.08)",
+          "backdropBlur": "18px",
+          "radius": "1.5rem",
+          "padding": "1.75rem"
+        },
+        "pill": {
+          "paddingX": "0.85rem",
+          "paddingY": "0.35rem",
+          "radius": "999px",
+          "fontSize": "0.75rem",
+          "tracking": "0.08em",
+          "background": "rgba(255,255,255,0.06)"
+        },
+        "primaryButton": {
+          "radius": "999px",
+          "paddingX": "1.6rem",
+          "paddingY": "0.9rem",
+          "fontWeight": "600",
+          "background": "linear-gradient(to right, #FF2D92, #FF8A3C)",
+          "hoverTransform": "translateY(-1px) scale(1.01)"
+        },
+        "secondaryButton": {
+          "radius": "999px",
+          "border": "1px solid rgba(255,255,255,0.18)",
+          "background": "rgba(255,255,255,0.03)"
+        },
+        "sectionHeader": {
+          "eyebrowUppercase": true,
+          "eyebrowTracking": "0.18em",
+          "eyebrowColor": "#A2A2B3",
+          "titleSizeDesktop": "2.4rem",
+          "titleSizeMobile": "1.9rem",
+          "maxWidth": "36rem"
+        }
+      },
+      "navbar": {
+        "sticky": true,
+        "logo": {
+          "type": "image",
+          "alt": "Mode logo",
+          "height": 32
+        },
+        "linksLeft": [
+          { "label": "How it works", "href": "#how-it-works" },
+          { "label": "Pricing", "href": "#pricing" },
+          { "label": "Work", "href": "#work" }
+        ],
+        "linksRight": [
+          { "label": "FAQ", "href": "#faqs" }
+        ],
+        "primaryCta": {
+          "label": "Book a roadmap call",
+          "href": "#cta"
+        }
+      },
+      "hero": {
+        "id": "top",
+        "background": {
+          "type": "gradientField",
+          "gradient": "radial multicolor inspired by creme.digital, with subtle noise and vignetting"
+        },
+        "layout": "twoColumn",
+        "headline": "Ship your AI MVP in 2 weeks",
+        "subheadline": "Mode designs and builds focused AI MVPs for founders in Europe and the US, so you can learn from real users instead of endless planning.",
+        "primaryCta": {
+          "label": "Start a Mode Sprint",
+          "href": "#cta"
+        },
+        "secondaryCta": {
+          "label": "See example builds",
+          "href": "#work"
+        },
+        "heroMeta": [
+          "For funded and bootstrapped teams",
+          "14 day build, real deadlines",
+          "Remote studio in EU and LATAM"
+        ],
+        "sidePanel": {
+          "type": "uiMockupStrip",
+          "description": "Stack of three overlapping glass cards showing example dashboards, AI assistants and product screens in the style of creme.digital, with soft gradients and charts."
+        }
+      },
+      "metricsStrip": {
+        "eyebrow": "Mode by the numbers",
+        "items": [
+          { "label": "MVPs shipped", "value": "20+" },
+          { "label": "Revenue influenced", "value": "$5M+" },
+          { "label": "Average build time", "value": "14 days" }
+        ]
+      },
+      "benefitCards": {
+        "id": "how-it-works",
+        "eyebrow": "Why founders work with Mode",
+        "title": "Build once, but in the right direction",
+        "layout": "horizontalStackOnDesktop",
+        "cards": [
+          {
+            "title": "Roadmap clarity in days",
+            "body": "We cut your idea down to one sharp, testable MVP that actually fits in 2 weeks, with a backlog for later.",
+            "iconHint": "simple map or nodes icon"
+          },
+          {
+            "title": "AI without the complexity",
+            "body": "You get sensible choices for models, tools and automations. No over engineered stacks, no research rabbit holes.",
+            "iconHint": "spark or orbit icon"
+          },
+          {
+            "title": "Launch ready, not just a prototype",
+            "body": "Your MVP ships with onboarding, analytics and a feedback loop so you can keep iterating after the sprint.",
+            "iconHint": "launch or arrow icon"
+          }
+        ]
+      },
+      "process": {
+        "id": "process",
+        "eyebrow": "Your 14 day build plan",
+        "title": "What working with Mode feels like",
+        "stepsLayout": "timelineRow",
+        "steps": [
+          {
+            "label": "Day 0 to 2",
+            "title": "Scope and focus",
+            "text": "Workshop to define target user, one core job to be done and the single flow we will ship."
+          },
+          {
+            "label": "Day 3 to 7",
+            "title": "Design and build",
+            "text": "Wireframes, UI and implementation of the main flow using AI plus no code or light code."
+          },
+          {
+            "label": "Day 8 to 11",
+            "title": "Integrate and refine",
+            "text": "Connect data sources, polish interactions, test internally and fix rough edges."
+          },
+          {
+            "label": "Day 12 to 14",
+            "title": "Launch with real users",
+            "text": "Onboard pilot users, track metrics and define next experiments and follow up sprints."
+          }
+        ]
+      },
+      "workShowcase": {
+        "id": "work",
+        "eyebrow": "Explore work",
+        "title": "Examples of Mode builds",
+        "cards": [
+          {
+            "label": "Agency inbox copilot",
+            "summary": "AI assistant that drafts replies and next steps for inbound leads, cutting response time in half.",
+            "tag": "B2B agency"
+          },
+          {
+            "label": "Community insights layer",
+            "summary": "Tool that aggregates community and CRM data to surface segments and suggested campaigns.",
+            "tag": "SaaS and communities"
+          },
+          {
+            "label": "Creator analytics mini SaaS",
+            "summary": "Simple dashboard that pulls social data and comments to help a creator studio ship new offers.",
+            "tag": "Creators"
+          }
+        ]
+      },
+      "pricing": {
+        "id": "pricing",
+        "eyebrow": "Transparent pricing",
+        "title": "Start with a sprint, extend if it works",
+        "plans": [
+          {
+            "name": "Mode Sprint",
+            "price": 4500,
+            "currency": "EUR",
+            "summary": "Two week MVP for one core user flow.",
+            "features": [
+              "Discovery workshop and product brief",
+              "Clickable prototype of main flow",
+              "Implementation using AI and no code stack",
+              "Basic analytics and feedback setup",
+              "Handover and next steps roadmap"
+            ],
+            "ctaLabel": "Book Sprint call",
+            "highlight": false
+          },
+          {
+            "name": "Mode Studio",
+            "price": 9500,
+            "currency": "EUR",
+            "summary": "From idea to launch with Mode owning build and early iterations.",
+            "features": [
+              "Everything in Mode Sprint",
+              "Extra flows or integrations",
+              "Back office automations where needed",
+              "Support during first 2 weeks post launch",
+              "Priority access for follow up sprints"
+            ],
+            "ctaLabel": "Talk about Studio",
+            "highlight": true
+          }
+        ],
+        "note": "Use pricing cards similar in presence to creme.digital but keep copy minimal and direct."
+      },
+      "testimonials": {
+        "eyebrow": "What founders say",
+        "title": "You do not need another deck. You need something live.",
+        "items": [
+          {
+            "name": "Founder, B2B SaaS",
+            "quote": "Mode forced us to cut our idea in half and ship something simple. That is why we are talking to paying users now."
+          },
+          {
+            "name": "Partner, marketing agency",
+            "quote": "We had been stuck for months trying to productize a service. In two weeks we had a working AI tool clients could log into."
+          },
+          {
+            "name": "Solo creator",
+            "quote": "It felt like adding a product team without hiring. Clear scope, fast decisions, zero fluff."
+          }
+        ]
+      },
+      "faqs": {
+        "id": "faqs",
+        "title": "Questions founders actually ask",
+        "items": [
+          {
+            "question": "Who is Mode for?",
+            "answer": "Founders and teams who already feel a specific problem and want a sharp MVP to test it, not a full platform."
+          },
+          {
+            "question": "Do you take equity?",
+            "answer": "No by default. We work on clear fixed pricing. In rare cases we can discuss a small equity component."
+          },
+          {
+            "question": "What do you need from us?",
+            "answer": "A short written brief and a 60 minute kickoff call. Most collaboration after that is async."
+          },
+          {
+            "question": "What happens after the sprint?",
+            "answer": "You keep the product, code and accounts. We can hand over to your team or line up another sprint."
+          }
+        ]
+      },
+      "finalCta": {
+        "id": "cta",
+        "eyebrow": "Two weeks from now you could have a live product",
+        "title": "Ready to stop planning and start shipping?",
+        "subtitle": "Tell us about your idea and we will reply with a simple 14 day MVP plan.",
+        "formFields": [
+          { "name": "name", "label": "Your name", "type": "text" },
+          { "name": "email", "label": "Work email", "type": "email" },
+          { "name": "company", "label": "Company or project", "type": "text" },
+          { "name": "region", "label": "Region", "type": "select", "options": ["Europe", "US", "Other"] },
+          { "name": "idea", "label": "What do you want to build?", "type": "textarea" }
+        ],
+        "submitLabel": "Send my idea"
+      },
+      "footer": {
+        "leftText": "Mode is a lean AI MVP studio helping founders turn overthinking into shipped products.",
+        "contactEmail": "hello@modemvp.studio",
+        "links": [
+          { "label": "How it works", "href": "#how-it-works" },
+          { "label": "Pricing", "href": "#pricing" },
+          { "label": "FAQ", "href": "#faqs" }
+        ],
+        "bottomNote": "© Mode Studio. All rights reserved."
+      }
+    }
+  }
+  

@@ -1,0 +1,519 @@
+{
+    "meta": {
+      "siteName": "Creme Digital",
+      "url": "https://www.creme.digital/",
+      "description": "Marketing and product landing page for an AI focused product studio that builds MVPs and apps for founders.",
+      "disclaimer": "This is an approximation of the visual system based on public screenshots and markup, not an official design token file.",
+      "version": "1.0"
+    },
+    "brand": {
+      "positioning": {
+        "primaryTagline": "The partner for founders building products with AI",
+        "subTagline": "AI product studio that designs, builds and launches apps in weeks, not months.",
+        "keywords": [
+          "AI product studio",
+          "MVP delivery",
+          "fast sprints",
+          "lovable apps",
+          "founder focused"
+        ]
+      },
+      "personality": {
+        "tone": ["expert", "calm", "confident", "friendly"],
+        "visualFeel": ["minimal", "polished", "soft gradients", "high contrast hero", "UI heavy imagery"]
+      },
+      "logo": {
+        "type": "wordmark with compact icon",
+        "placement": "topLeft",
+        "safeArea": 16,
+        "height": 24
+      }
+    },
+    "colors": {
+      "notes": "Hex values are estimated from screenshots. Names are semantic so they can be remapped later.",
+      "palette": {
+        "backgroundMain": {"hex": "#FFFFFF", "role": ["page background", "cards on light areas"], "approximate": false},
+        "backgroundAlt": {"hex": "#F9F6F8", "role": ["section background", "card contrast"], "approximate": true},
+        "backgroundMuted": {"hex": "#F3F0F4", "role": ["faq background", "testimonial strip"], "approximate": true},
+        "borderSubtle": {"hex": "#E5E4EA", "role": ["card borders", "inputs", "separators"], "approximate": true},
+        "borderSoft": {"hex": "#DDD9E3", "role": ["component borders", "faq items"], "approximate": true},
+        "textPrimary": {"hex": "#0B1020", "role": ["headlines", "high emphasis body"], "approximate": true},
+        "textSecondary": {"hex": "#4B5563", "role": ["body copy", "supporting text"], "approximate": true},
+        "textMuted": {"hex": "#6B7280", "role": ["captions", "meta labels"], "approximate": true},
+        "textOnDark": {"hex": "#FFFFFF", "role": ["text on primary buttons", "chips over gradients"], "approximate": false},
+        "accentPurple": {"hex": "#6B40CD", "role": ["gradient stop", "icons", "chips"], "approximate": true},
+        "accentPink": {"hex": "#D7428A", "role": ["gradient stop", "metrics highlight"], "approximate": true},
+        "accentBlue": {"hex": "#295AF9", "role": ["gradient stop", "link hover", "charts"], "approximate": true},
+        "accentCoral": {"hex": "#F97378", "role": ["small pills", "chart accents"], "approximate": true},
+        "accentOrange": {"hex": "#F97316", "role": ["tiny callouts", "icons"], "approximate": true},
+        "navIconBg": {"hex": "#0F172A", "role": ["small round icon container in navbar"], "approximate": true},
+        "statNumber": {"hex": "#111827", "role": ["big numeric stats"], "approximate": true}
+      },
+      "gradients": {
+        "heroBackground": {
+          "stops": [
+            {"hex": "#FFEEF7", "position": 0},
+            {"hex": "#F9D7E5", "position": 0.25},
+            {"hex": "#D7428A", "position": 0.5},
+            {"hex": "#6B40CD", "position": 0.75},
+            {"hex": "#295AF9", "position": 1}
+          ],
+          "angleDegrees": 135,
+          "usage": ["large diagonal banners", "how we work section strips"]
+        },
+        "cardHighlight": {
+          "stops": [
+            {"hex": "#FFFFFF", "position": 0},
+            {"hex": "#F9F2FF", "position": 1}
+          ],
+          "angleDegrees": 145,
+          "usage": ["key process cards", "pricing highlight card background"]
+        }
+      }
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Inter, system-ui, -apple-system, BlinkMacSystemFont, SF Pro Text, sans-serif",
+        "numeric": "Inter, system-ui, -apple-system, BlinkMacSystemFont, SF Pro Text, sans-serif"
+      },
+      "scale": {
+        "displayXL": {"fontSize": 48, "lineHeight": 1.05, "fontWeight": 700, "letterSpacing": -0.04},
+        "displayL": {"fontSize": 40, "lineHeight": 1.1, "fontWeight": 700, "letterSpacing": -0.04},
+        "h1": {"fontSize": 32, "lineHeight": 1.15, "fontWeight": 700, "letterSpacing": -0.03},
+        "h2": {"fontSize": 28, "lineHeight": 1.2, "fontWeight": 600, "letterSpacing": -0.02},
+        "h3": {"fontSize": 22, "lineHeight": 1.25, "fontWeight": 600, "letterSpacing": -0.01},
+        "h4": {"fontSize": 18, "lineHeight": 1.3, "fontWeight": 600, "letterSpacing": 0},
+        "bodyL": {"fontSize": 18, "lineHeight": 1.6, "fontWeight": 400},
+        "bodyM": {"fontSize": 16, "lineHeight": 1.6, "fontWeight": 400},
+        "bodyS": {"fontSize": 14, "lineHeight": 1.5, "fontWeight": 400},
+        "eyebrow": {"fontSize": 12, "lineHeight": 1.4, "fontWeight": 500, "letterSpacing": 0.08, "textTransform": "uppercase"},
+        "button": {"fontSize": 14, "lineHeight": 1.2, "fontWeight": 600, "letterSpacing": 0.02},
+        "statNumber": {"fontSize": 32, "lineHeight": 1.1, "fontWeight": 700, "letterSpacing": -0.03}
+      }
+    },
+    "layout": {
+      "grid": {
+        "maxWidthDesktop": 1120,
+        "maxWidthLarge": 1200,
+        "columns": 12,
+        "columnWidth": "fluid",
+        "gutter": 24,
+        "marginXDesktop": 32,
+        "marginXTablet": 24,
+        "marginXMobile": 16,
+        "sectionSpacingDesktop": 112,
+        "sectionSpacingMobile": 72,
+        "cardRadius": 24,
+        "pillRadius": 999,
+        "inputRadius": 999
+      },
+      "spacingScale": {
+        "xxs": 4,
+        "xs": 8,
+        "sm": 12,
+        "md": 16,
+        "lg": 24,
+        "xl": 32,
+        "xxl": 40,
+        "sectionPaddingY": 80,
+        "sectionPaddingYAlt": 96
+      },
+      "breakpoints": {
+        "mobile": 0,
+        "tablet": 768,
+        "desktop": 1024,
+        "large": 1280
+      }
+    },
+    "elevation": {
+      "shadows": {
+        "cardSoft": "0 18px 60px rgba(15, 23, 42, 0.07)",
+        "cardFlat": "0 1px 0 rgba(15, 23, 42, 0.04)",
+        "floating": "0 32px 80px rgba(15, 23, 42, 0.12)",
+        "buttonFocus": "0 0 0 1px #FFFFFF, 0 0 0 6px rgba(41, 90, 249, 0.25)"
+      }
+    },
+    "components": {
+      "navbar": {
+        "heightDesktop": 72,
+        "heightMobile": 64,
+        "background": "backgroundMain",
+        "layout": "logo left, nav links center, primary cta right",
+        "navLinks": ["About", "Work", "Contact", "Pricing"],
+        "primaryCta": {
+          "label": "Book a Call",
+          "variant": "primaryFilled",
+          "shape": "capsule"
+        },
+        "behaviour": {
+          "sticky": true,
+          "onScroll": "adds subtle shadow and slightly opaque background"
+        }
+      },
+      "buttonPrimary": {
+        "backgroundColor": "navIconBg",
+        "textColor": "textOnDark",
+        "borderColor": "navIconBg",
+        "radius": 999,
+        "paddingX": 20,
+        "paddingY": 10,
+        "fontToken": "button",
+        "hover": {
+          "backgroundColor": "#020617",
+          "shadow": "cardSoft"
+        }
+      },
+      "buttonSecondary": {
+        "backgroundColor": "#F9FAFB",
+        "textColor": "textPrimary",
+        "borderColor": "borderSubtle",
+        "radius": 999,
+        "paddingX": 18,
+        "paddingY": 10,
+        "fontToken": "button",
+        "hover": {
+          "backgroundColor": "#FFFFFF",
+          "shadow": "cardFlat"
+        }
+      },
+      "chip": {
+        "backgroundColor": "#F3E8FF",
+        "textColor": "accentPurple",
+        "radius": 999,
+        "paddingX": 12,
+        "paddingY": 6,
+        "fontToken": "eyebrow"
+      },
+      "metricCard": {
+        "backgroundColor": "backgroundMain",
+        "borderColor": "borderSubtle",
+        "radius": 20,
+        "padding": 20,
+        "layout": "label above, value large below",
+        "valueToken": "statNumber",
+        "labelToken": "bodyS"
+      },
+      "processStepCard": {
+        "background": "cardHighlight",
+        "radius": 24,
+        "padding": 24,
+        "shadow": "cardSoft",
+        "header": {
+          "eyebrowToken": "eyebrow",
+          "titleToken": "h2"
+        },
+        "bodyToken": "bodyM",
+        "badge": {
+          "shape": "rounded",
+          "backgroundColor": "backgroundMain",
+          "textToken": "eyebrow"
+        }
+      },
+      "portfolioTile": {
+        "backgroundColor": "backgroundMain",
+        "radius": 24,
+        "shadow": "cardSoft",
+        "imageAspectRatio": "16:10",
+        "layout": "image top, title and description below",
+        "hover": {
+          "shadow": "floating",
+          "translateY": -4
+        }
+      },
+      "pricingCard": {
+        "radius": 24,
+        "padding": 28,
+        "borderColor": "borderSoft",
+        "backgroundColor": "backgroundMain",
+        "highlightVariant": {
+          "backgroundGradient": "cardHighlight",
+          "borderColor": "accentPurple",
+          "shadow": "floating"
+        },
+        "priceToken": "displayL",
+        "planNameToken": "h4",
+        "descriptionToken": "bodyS",
+        "listItemToken": "bodyS"
+      },
+      "testimonialCard": {
+        "radius": 20,
+        "padding": 24,
+        "backgroundColor": "backgroundMain",
+        "shadow": "cardSoft",
+        "layout": "quote text, avatar and meta stacked",
+        "quoteToken": "bodyM",
+        "nameToken": "bodyS",
+        "roleToken": "bodyS"
+      },
+      "faqItem": {
+        "backgroundColor": "backgroundMain",
+        "borderColor": "borderSoft",
+        "radius": 16,
+        "paddingX": 20,
+        "paddingY": 16,
+        "questionToken": "bodyM",
+        "answerToken": "bodyS",
+        "icon": {
+          "shape": "circle",
+          "size": 24,
+          "backgroundColor": "backgroundMuted"
+        }
+      },
+      "inputField": {
+        "backgroundColor": "backgroundMain",
+        "borderColor": "borderSubtle",
+        "radius": 999,
+        "paddingX": 16,
+        "paddingY": 10,
+        "fontToken": "bodyS",
+        "placeholderColor": "textMuted",
+        "focusRing": "buttonFocus"
+      }
+    },
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "background": "backgroundMain",
+        "layout": {
+          "type": "twoColumn",
+          "alignment": "center",
+          "columnRatio": [5, 7],
+          "contentMaxWidth": 520
+        },
+        "content": {
+          "eyebrow": "Official gold partner of Lovable",
+          "headline": "The partner for founders building products with AI",
+          "subcopy": "Number one AI product studio trusted by startups to design, build and launch products that scale.",
+          "primaryCta": "Book a Call",
+          "secondaryCta": "View Pricing",
+          "supportLogos": "Row of small client or partner badges under main hero card on desktop"
+        },
+        "rightColumn": {
+          "heroAppCollage": {
+            "type": "stackedScreens",
+            "cards": "Multiple UI shots in a pseudo floating stack with subtle 3d perspective",
+            "metricsOverlay": "Small chip with textual metrics like sprints, launch time, funding"
+          }
+        }
+      },
+      "metricsStrip": {
+        "id": "metrics",
+        "background": "backgroundMain",
+        "layout": {
+          "type": "threeColumnStats",
+          "alignment": "center",
+          "maxWidth": 880
+        },
+        "items": [
+          {"label": "Products built", "value": "200+"},
+          {"label": "Client funding", "value": "$25M+"},
+          {"label": "Clients", "value": "80+"}
+        ]
+      },
+      "trustedBy": {
+        "id": "trustedBy",
+        "background": "backgroundMain",
+        "layout": {"type": "logoRow", "maxWidth": 880},
+        "content": {
+          "title": "Trusted by industry leaders",
+          "logos": "Montra, Launchpop and other startup or tech brand logos in monochrome styling"
+        }
+      },
+      "howWeWork": {
+        "id": "howWeWork",
+        "background": "heroBackground gradient band behind floating cards",
+        "layout": {
+          "type": "stackedCardsOverGradient",
+          "cardWidth": 540,
+          "cardsPerRowDesktop": 1,
+          "cardsSpacing": 24
+        },
+        "intro": {
+          "title": "How we work",
+          "subtitle": "We simplify complex builds into fast, focused sprints that ship real results every week."
+        },
+        "steps": [
+          {
+            "id": "build",
+            "eyebrow": "Build",
+            "title": "Build your MVP in just 2 weeks",
+            "body": "Initial sprint focuses on core flows and value so founders can validate the idea fast before large investment.",
+            "visual": "Dashboard and analytics UI frame with cards and charts"
+          },
+          {
+            "id": "iterate",
+            "eyebrow": "Iterate",
+            "title": "Set your roadmap and milestones",
+            "body": "After launch the team moves into repeatable sprint rhythm where metrics and feedback drive roadmap.",
+            "visual": "Progress tracking app style board with tasks and completion percentage"
+          },
+          {
+            "id": "grow",
+            "eyebrow": "Grow",
+            "title": "Move faster with AI powered tools",
+            "body": "Development stack uses Lovable, Cursor and Supabase to combine automation with real engineering patterns.",
+            "visual": "Row of AI dev tool logos and UI snapshots"
+          },
+          {
+            "id": "collaborate",
+            "eyebrow": "Collaborate",
+            "title": "Stay flexible with async collaboration",
+            "body": "Weekly calls plus async channels in Slack keep work moving without heavy meeting overhead.",
+            "visual": "Chat interface mock between client and studio"
+          }
+        ]
+      },
+      "exploreWork": {
+        "id": "exploreWork",
+        "background": "backgroundMain",
+        "layout": {
+          "type": "galleryRow",
+          "cardsPerRowDesktop": 3,
+          "cardsPerRowTablet": 2,
+          "cardsPerRowMobile": 1
+        },
+        "content": {
+          "title": "Explore work",
+          "subtitle": "We build polished, production ready apps that look great and scale fast.",
+          "cta": "View all work",
+          "projects": [
+            "Rocketship 3D printing visualization tool",
+            "Internal tool AI powered internal platform",
+            "Empowerly AI coaching companion"
+          ]
+        }
+      },
+      "whySubscribe": {
+        "id": "whySubscribe",
+        "background": "backgroundAlt",
+        "layout": {"type": "twoColumn", "cardsPerRowDesktop": 2},
+        "content": {
+          "title": "Why subscribe",
+          "subtitle": "By the end you have a full working product ready to launch to the world.",
+          "pillars": [
+            {
+              "title": "AI native",
+              "body": "AI is treated as a multiplier for shipping speed and idea exploration, not a bolt on afterthought.",
+              "visual": "App flow diagram or AI interface cards"
+            },
+            {
+              "title": "Clear async collaboration",
+              "body": "Combination of weekly calls and Slack updates so founders feel in control without micromanaging.",
+              "visual": "Chat style phone frames"
+            },
+            {
+              "title": "Design matters",
+              "body": "Visual quality is positioned as strategic advantage in markets filled with template clones.",
+              "visual": "Close up on crafted UI components"
+            },
+            {
+              "title": "Operate with freedom",
+              "body": "Pause and resume model replaces rigid retainers so clients keep leverage.",
+              "visual": "List of things to say no to as tags"
+            }
+          ]
+        }
+      },
+      "pricing": {
+        "id": "pricing",
+        "background": "backgroundMain",
+        "layout": {
+          "type": "splitPricing",
+          "cardsPerRowDesktop": 2,
+          "alignment": "center",
+          "maxWidth": 880
+        },
+        "content": {
+          "sectionTitle": "Our pricing",
+          "sectionSubtitle": "Fractional team with flexible pricing and no contract term.",
+          "plans": [
+            {
+              "name": "Sprints",
+              "label": "2 week sprints",
+              "price": 4500,
+              "billing": "bi weekly",
+              "highlight": false,
+              "primaryBenefit": "Move fast with focused strategy, design and development work in each block.",
+              "features": [
+                "AI developer team",
+                "Unlimited revisions during the sprint",
+                "Product strategy and roadmap support",
+                "Integrations and APIs",
+                "Slack communication",
+                "Weekly progress updates"
+              ]
+            },
+            {
+              "name": "MVP development",
+              "label": "Two week delivery",
+              "price": 9500,
+              "billing": "one time",
+              "highlight": true,
+              "primaryBenefit": "Complete usable MVP shipped in fourteen days using Lovable stack.",
+              "features": [
+                "Functional MVP built on Lovable",
+                "Database and API integrations with Supabase and OpenAI",
+                "User authentication and onboarding",
+                "Reusable product design components",
+                "Slack communication",
+                "Weekly progress updates"
+              ]
+            }
+          ]
+        }
+      },
+      "bookCall": {
+        "id": "bookCall",
+        "background": "backgroundAlt",
+        "layout": {"type": "centeredCard", "maxWidth": 640},
+        "content": {
+          "title": "Book a call",
+          "subtitle": "Short free call to scope work and fit.",
+          "cta": "Book a Call",
+          "note": "Forms and scheduler are likely embedded external tool styled to match the brand."
+        }
+      },
+      "testimonials": {
+        "id": "testimonials",
+        "background": "backgroundMuted",
+        "layout": {
+          "type": "horizontalScroller",
+          "cardWidth": 320
+        },
+        "content": {
+          "title": "Trusted by industry leaders",
+          "subtitle": "Client quotes highlight speed, quality and ability to deliver usable MVPs.",
+          "quotes": "Seven to eight testimonial cards, each with quote, avatar and company."
+        }
+      },
+      "faq": {
+        "id": "faq",
+        "background": "backgroundMain",
+        "layout": {
+          "type": "twoColumnAccordion",
+          "maxWidth": 960
+        },
+        "content": {
+          "title": "Questions",
+          "subtitle": "Grouped into general, services, pricing and AI topics.",
+          "groups": ["General", "Services and process", "Pricing and timelines", "AI and integrations"]
+        }
+      },
+      "footer": {
+        "id": "footer",
+        "background": "#020617",
+        "textColor": "textOnDark",
+        "layout": {
+          "type": "twoRow",
+          "maxWidth": 1120
+        },
+        "content": {
+          "brandBlock": "Logo, short description and possibly Lovable partner badge.",
+          "nav": ["About", "Work", "Pricing", "Contact"],
+          "legal": ["Privacy", "Terms"],
+          "copyright": "Copyright Creme Digital with year auto update"
+        }
+      }
+    }
+  }
+  

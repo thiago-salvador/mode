@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-textPrimary font-body;
+    position: relative;
+    overflow-x: hidden;
+    isolation: isolate;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Ambient Light Blobs - REMOVED for White Theme */
+  /* body::before, body::after, body > #ambient-blob-3 { display: none; } */
+
+  /* Noise Texture Overlay - Kept for texture but very subtle */
+  body>*:not(#ambient-blob-3) {
+    position: relative;
+    z-index: 10;
+  }
+
+  #noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 99999;
+  }
+
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(90deg, #FF1F8A 0%, #FF8F28 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-bg {
+    background: linear-gradient(90deg, #FF1F8A 0%, #FF8F28 100%);
+  }
+
+  /* Glassmorphism - White Theme Version */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0px 4px 12px -1px rgba(0, 0, 0, 0.02),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.06),
+      inset 0px 0px 0px 1px rgba(255, 255, 255, 0.6);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    display: none;
+    /* Remove noise from cards for cleaner look */
+  }
+
+  .glass-card>* {
+    position: relative;
+    z-index: 1;
+  }
+
+  .glass-card-hover {
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0px 16px 32px -8px rgba(0, 0, 0, 0.06),
+      0px 4px 8px -4px rgba(0, 0, 0, 0.02);
+    transform: translateY(-4px);
+  }
+
+  /* Bento Card - Specific styling for grid cards */
+  .bento-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.45) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border-radius: 2rem;
+    padding: 2rem;
+    box-shadow:
+      0px 4px 24px -1px rgba(0, 0, 0, 0.04),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.1),
+      inset 0px 1px 0px 0px rgba(255, 255, 255, 1),
+      inset 0px -1px 0px 0px rgba(0, 0, 0, 0.02);
+  }
+
+  .hero-gradient {
+    background: transparent;
+    position: relative;
+  }
+
+  .section-padding {
+    @apply py-24 sm:py-32 lg:py-40;
+  }
+
+  .container-padding {
+    @apply px-6 sm:px-8 lg:px-12;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Creme Digital Typography - Exact Specs - ENHANCED */
+  .heading-hero {
+    font-family: var(--font-space-grotesk), 'Inter', sans-serif;
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+  }
+
+  .heading-large {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+  }
+
+  .heading-1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .heading-2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  .eyebrow {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #4B5563;
+  }
+
+  .body-large {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #4B5563;
+  }
+
+  .body-medium {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #4B5563;
+  }
+
+  .body-small {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #6B7280;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  /* Gradient Heading */
+  .gradient-heading {
+    background: linear-gradient(180deg, #0F0F10 0%, #3F3F46 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.04) 50%,
+        transparent 100%);
+    background-size: 200% 100%;
+  }
+}
