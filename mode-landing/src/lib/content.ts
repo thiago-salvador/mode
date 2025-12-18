@@ -340,10 +340,17 @@ export const content = {
     members: [
       {
         name: "Thiago Salvador",
-        role: "Founder & Product Lead",
-        bio: "ex-Startup Founder | 10+ MVPs shipped | AI Product Expert",
-        image: "/team/thiago.jpg",
-        linkedin: "https://www.linkedin.com/in/thiago-salvador",
+        role: "Co-Founder & AI Specialist",
+        bio: "10+ years building products | Ex-Startup Lisboa | AI Product Expert",
+        image: "/team/thiago-salvador.jpg",
+        linkedin: "https://www.linkedin.com/in/salvadorthiago/",
+      },
+      {
+        name: "Annika Löwe",
+        role: "Co-Founder & Business Development",
+        bio: "Former YC Product Lead | 50+ founders helped | Launch specialist",
+        image: "/team/annika-lowe.jpg",
+        linkedin: "https://www.linkedin.com/in/annika-l%C3%B6we-618b1863/",
       },
     ],
   },
