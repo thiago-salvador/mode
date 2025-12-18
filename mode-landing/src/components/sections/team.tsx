@@ -1,120 +1,141 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
-import { SectionHeader } from "@/components/ui/section-header";
-import { FadeIn } from "@/components/ui/fade-in";
-import { Linkedin, Github } from "lucide-react";
+import { Linkedin } from "lucide-react";
+import { GlassCard } from "@/components/ui/glass-card";
+import { content } from "@/lib/content";
 
-interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  image: string;
-  linkedin?: string;
-  github?: string;
-}
-
-const team: TeamMember[] = [
+// Fallback team members if content.team.members is empty
+const teamMembers = content.team?.members || [
   {
     name: "Thiago Salvador",
-    role: "co-Founder & AI Specialist",
-    bio: "10+ years building products. Ex-Startup Lisboa, specialized in rapid MVP development and AI integration.",
+    role: "Co-Founder & AI Specialist",
+    bio: "10+ years building products | Ex-Startup Lisboa | AI Product Expert",
     image: "/team/thiago-salvador.jpg",
     linkedin: "https://www.linkedin.com/in/salvadorthiago/",
   },
   {
     name: "Annika Löwe",
     role: "Co-Founder & Business Development",
-    bio: "Former product lead at YC-backed startups. Helped 50+ founders validate and launch their ideas.",
+    bio: "Former YC Product Lead | 50+ founders helped | Launch specialist",
     image: "/team/annika-lowe.jpg",
     linkedin: "https://www.linkedin.com/in/annika-l%C3%B6we-618b1863/",
   },
 ];
 
-export function Team() {
+// Team Member Card Component
+function TeamMemberCard({ member, index }: { member: typeof teamMembers[0]; index: number }) {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+
   return (
-    <section id="team" className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <FadeIn>
-          <SectionHeader
-            eyebrow="The team"
-            title="Built by founders, for founders"
-          />
-        </FadeIn>
-
-        <div className="mt-12 text-center max-w-3xl mx-auto mb-16">
-          <p className="text-lg text-textSecondary leading-relaxed">
-            We&apos;ve been in your shoes. We know the frustration of slow agencies, unreliable freelancers,
-            and the pressure to ship fast. That&apos;s why we built Mode—to help ambitious founders launch faster.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {team.map((member, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="flex flex-col items-center text-center">
-                {/* Photo */}
-                <div className="relative w-32 h-32 rounded-full overflow-hidden mb-6 ring-4 ring-gray-100">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* Info */}
-                <h3 className="font-heading text-2xl font-bold mb-2 text-gray-900">
-                  {member.name}
-                </h3>
-                <p className="text-sm font-semibold text-accentFrom uppercase tracking-wider mb-4">
-                  {member.role}
-                </p>
-                <p className="text-textSecondary leading-relaxed mb-6">
-                  {member.bio}
-                </p>
-
-                {/* Social Links */}
-                <div className="flex gap-3">
-                  {member.linkedin && (
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 bg-gray-100 hover:bg-blue-100 rounded-full flex items-center justify-center transition-colors group"
-                    >
-                      <Linkedin className="w-5 h-5 text-gray-600 group-hover:text-blue-600" />
-                    </a>
-                  )}
-                  {member.github && (
-                    <a
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 bg-gray-100 hover:bg-gray-800 rounded-full flex items-center justify-center transition-colors group"
-                    >
-                      <Github className="w-5 h-5 text-gray-600 group-hover:text-white" />
-                    </a>
-                  )}
-                </div>
-              </div>
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.5, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <GlassCard className="h-full hover:scale-105 transition-all duration-300 group">
+        <div className="flex flex-col items-center text-center">
+          {/* Profile Image with Gradient Glow */}
+          <div className="relative w-32 h-32 mb-6">
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-orange-500 rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
+            <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl">
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                className="object-cover"
+              />
             </div>
+          </div>
+
+          {/* Name */}
+          <h3 className="text-2xl font-bold text-textPrimary mb-2 group-hover:gradient-text transition-all duration-300">
+            {member.name}
+          </h3>
+
+          {/* Role */}
+          <p className="text-sm font-semibold text-textSecondary uppercase tracking-wider mb-4">
+            {member.role}
+          </p>
+
+          {/* Bio */}
+          <p className="text-textMuted text-sm mb-6 leading-relaxed">
+            {member.bio}
+          </p>
+
+          {/* LinkedIn Link */}
+          <a
+            href={member.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white rounded-full font-semibold text-sm hover:scale-105 transition-transform duration-300 shadow-lg shadow-pink-500/30"
+          >
+            <Linkedin className="w-4 h-4" />
+            Connect on LinkedIn
+          </a>
+        </div>
+      </GlassCard>
+    </motion.div>
+  );
+}
+
+export function Team() {
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
+
+  return (
+    <section id="team" className="py-24 bg-gradient-to-b from-white via-gray-50/30 to-white overflow-hidden">
+      <div className="max-w-7xl mx-auto container-padding">
+        {/* Section Header */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-12"
+        >
+          <div className="eyebrow text-center mb-4">
+            {content.team?.eyebrow || "Meet the team"}
+          </div>
+          <h2 className="heading-1 text-textPrimary mb-6 max-w-3xl mx-auto">
+            {content.team?.title || "Built by founders, for founders"}
+          </h2>
+          <p className="text-lg text-textSecondary max-w-2xl mx-auto leading-relaxed">
+            We&apos;ve been in your shoes. We know the frustration of slow agencies and the pressure to ship fast. That&apos;s why we built Mode.
+          </p>
+        </motion.div>
+
+        {/* Team Members Grid */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+          {teamMembers.map((member, index) => (
+            <TeamMemberCard key={member.name} member={member} index={index} />
           ))}
         </div>
 
-        {/* Additional Context */}
-        <div className="mt-16 max-w-3xl mx-auto">
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-100 rounded-2xl p-8">
-            <h3 className="font-heading text-xl font-bold mb-4 text-center text-gray-900">
+        {/* Why We Started Mode */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto"
+        >
+          <GlassCard className="bg-gradient-to-r from-pink-50/50 to-orange-50/50 border-2 border-pink-100">
+            <h3 className="text-xl font-bold mb-4 text-center text-textPrimary">
               Why we started Mode
             </h3>
-            <p className="text-gray-700 leading-relaxed text-center">
+            <p className="text-textSecondary leading-relaxed text-center">
               After shipping 20+ MVPs and seeing countless founders struggle with slow development cycles,
-              we built Mode to solve one problem: <span className="font-semibold">how do you ship a testable product in 2 weeks, not 6 months?</span> Every feature, every process, every decision we make is designed to help you launch faster.
+              we built Mode to solve one problem:{" "}
+              <span className="font-bold gradient-text">how do you ship a testable product in 2 weeks, not 6 months?</span>{" "}
+              Every feature, every process, every decision we make is designed to help you launch faster.
             </p>
-          </div>
-        </div>
+          </GlassCard>
+        </motion.div>
       </div>
     </section>
   );

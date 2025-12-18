@@ -60,8 +60,8 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.slice(0, 4).map((link) => (
+          <div className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

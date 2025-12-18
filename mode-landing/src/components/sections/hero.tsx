@@ -27,9 +27,44 @@ export function Hero() {
                 <UrgencyBanner />
               </div>
 
+              {/* Anxiety Hook Question */}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg md:text-xl text-textMuted mb-4 font-medium italic"
+              >
+                {content.hero.anxietyHook}
+              </motion.p>
+
+              {/* Word-by-word reveal headline */}
               <h1 className="heading-hero text-textPrimary mb-6 text-balance tracking-tight">
-                {content.hero.headline.start} <br />
-                <span className="gradient-text">{content.hero.headline.highlight}</span>
+                <span className="block">
+                  {content.hero.headline.start.split(' ').map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      className="inline-block mr-[0.25em]"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </span>
+                <span className="gradient-text block">
+                  {content.hero.headline.highlight.split(' ').map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      className="inline-block mr-[0.25em]"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </span>
               </h1>
 
               <p className="text-xl md:text-2xl text-textSecondary mb-10 max-w-lg text-balance leading-relaxed">

@@ -8,11 +8,9 @@ export const content = {
       alt: "Mode logo",
     },
     links: [
-      { label: "Services", href: "#how-it-works" },
       { label: "Work", href: "#work" },
       { label: "Pricing", href: "#pricing" },
-      { label: "Blog", href: "/blog" },
-      { label: "FAQ", href: "#faqs" },
+      { label: "Contact", href: "#cta" },
     ],
     primaryCta: {
       label: "Book a call",
@@ -23,6 +21,7 @@ export const content = {
     badge: {
       text: ["Mode Studio", "•", "AI Product Partner"],
     },
+    anxietyHook: "How do you ship an AI MVP when you're not technical?",
     headline: {
       start: "Stop wasting months.",
       highlight: "Ship in 2 weeks.",
@@ -247,7 +246,7 @@ export const content = {
     title: "Flexible partnership options",
     plans: [
       {
-        name: "MVP Sprint",
+        name: "Mode Protocol",
         price: "€3,500",
         summary: "Rapid design and build for a core product version.",
         features: [
@@ -265,7 +264,7 @@ export const content = {
         price: "€9,500",
         summary: "End-to-end partnership for complex AI products.",
         features: [
-          "Everything in MVP Sprint",
+          "Everything in Mode Protocol",
           "Advanced AI agents & workflows",
           "Payment & subscription systems",
           "30 days post-launch support",
@@ -335,6 +334,19 @@ export const content = {
       successMessage: "✅ Got it! We'll send your detailed sprint plan within 24 hours. Check your email (including spam) from hello@modemvp.studio.",
     },
   },
+  team: {
+    eyebrow: "Meet the team",
+    title: "Built by founders, for founders",
+    members: [
+      {
+        name: "Thiago Salvador",
+        role: "Founder & Product Lead",
+        bio: "ex-Startup Founder | 10+ MVPs shipped | AI Product Expert",
+        image: "/team/thiago.jpg",
+        linkedin: "https://www.linkedin.com/in/thiago-salvador",
+      },
+    ],
+  },
   about: {
     eyebrow: "About Mode",
     title: "Your partner in building AI products",
@@ -353,6 +365,15 @@ export const content = {
   footer: {
     leftText: "Mode is a digital product studio partnering with founders to build the next generation of AI companies.",
     contactEmail: "hello@modemvp.studio",
+    socialLinks: [
+      { name: "LinkedIn", url: "https://www.linkedin.com/company/mode-studio", icon: "linkedin" },
+      { name: "Instagram", url: "https://www.instagram.com/mode.studio", icon: "instagram" },
+    ],
+    secondaryLinks: [
+      { label: "Services", href: "#how-it-works" },
+      { label: "Blog", href: "/blog" },
+      { label: "FAQ", href: "#faqs" },
+    ],
     bottomNote: "© 2024 Mode Studio. All rights reserved.",
   },
 };

@@ -203,10 +203,11 @@ function BenefitCard({ benefit, index }: { benefit: typeof content.whyMode.benef
 // Main Component
 export function WhyMode() {
   const headerRef = useRef(null);
+  const sectionRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-gray-50/30 to-white overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-white via-gray-50/30 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto container-padding">
         {/* Section Header */}
         <motion.div
